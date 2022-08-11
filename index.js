@@ -11,7 +11,11 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 
 let employeeList;
+//list of employee objects goes in this list
 let printToFile;
+//the string used to print the html file
+
+//the questions array for the manager
 const managerQuestions = [
     {
       type: 'input',
@@ -52,7 +56,7 @@ const managerQuestions = [
       message: 'What is your Manager\'s Office Number?',
     },
  ];
-
+//the questions array for the engineer
   const engineerQuestions = [
     {
       type: 'input',
@@ -99,7 +103,7 @@ const managerQuestions = [
       },
     },
   ];
-
+//the questions array for the intern
   const interQuestions = [
     {
       type: 'input',
@@ -140,7 +144,7 @@ const managerQuestions = [
       },
     },
   ];
-
+//the questions array to ask the user what to do next
   const employeeQuery = [
     {
       type: 'list',
@@ -150,90 +154,76 @@ const managerQuestions = [
     },
   ];
 
+  //writes the string template to the file
   function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) =>
         err ? console.log(err) : null
       );
   }
 
-  function appendToFile(fileName, data) {
-    fs.appendFile(fileName, data, (err) =>
-        err ? console.log(err) : null
-      );
-  }
-
+  //these three functions call the generateHTML file to build their object cards and add them to the string template
   function addManagerCard(manager){
     printToFile += buildHTMLFile.generateHTMLCardManager(manager.getName(), manager.getId(), manager.getEmail(), manager.getOfficeNumber());
-    //appendToFile(fileLoc, buildHTMLFile.generateHTMLCardManager(manager.getName(), manager.getId(), manager.getEmail(), manager.getOfficeNumber()));
   }
 
   function addEngineerCard(engineer){
     printToFile += buildHTMLFile.generateHTMLCardEngineer(engineer.getName(), engineer.getId(), engineer.getEmail(), engineer.getGithub());
-    //appendToFile(fileLoc, buildHTMLFile.generateHTMLCardEngineer(engineer.getName(), engineer.getId(), engineer.getEmail(), engineer.getGithub()));
   }
 
   function addInternCard(intern){
     printToFile += buildHTMLFile.generateHTMLCardIntern(intern.getName(), intern.getId(), intern.getEmail(), intern.getSchool());
-    //appendToFile(fileLoc, buildHTMLFile.generateHTMLCardIntern(intern.getName(), intern.getId(), intern.getEmail(), intern.getSchool()));
   }
 
+  //cycles through the list of employees from input to call the methods to build each card
   function buildEmployeeCards(){
     for(let i=0; i<employeeList.length;i++){
       switch (employeeList[i].getRole()) {
         case 'Manager':
           addManagerCard(employeeList[i]);
-          console.log(`Manager -${i}`);
-          console.log(`Name -${employeeList[i].getName()}`);
-          console.log(`ID -${employeeList[i].getId()}`);
-          console.log(`email -${employeeList[i].getEmail()}`);
-          console.log(`Office -${employeeList[i].getOfficeNumber()}`);
           break;
         case 'Engineer':
           addEngineerCard(employeeList[i]);
-          console.log(`Engineer -${i}`);
-          console.log(`Name -${employeeList[i].getName()}`);
-          console.log(`ID -${employeeList[i].getId()}`);
-          console.log(`email -${employeeList[i].getEmail()}`);
-          console.log(`GitHub -${employeeList[i].getGithub()}`);
           break;
         case 'Intern':
           addInternCard(employeeList[i]);
-          console.log(`Intern -${i}`);
-          console.log(`Name -${employeeList[i].getName()}`);
-          console.log(`ID -${employeeList[i].getId()}`);
-          console.log(`email -${employeeList[i].getEmail()}`);
-          console.log(`School -${employeeList[i].getSchool()}`);
           break;
       }
     }
   }
 
+  //this method is called when the user has finihed to build the output html file
   function buildHTML(){
+    //writes the header
     printToFile += buildHTMLFile.generateHTMLPageHeader();
-    //writeToFile(fileLoc, buildHTMLFile.generateHTMLPageHeader());
+    //builds the content cards
     buildEmployeeCards();
-    console.log("append end");
+    //writes the end of the file
     printToFile += buildHTMLFile.generateHTMLPageEnd();
-    //appendToFile(fileLoc, buildHTMLFile.generateHTMLPageEnd());
     writeToFile(fileLoc, printToFile);
 
   }
 
+  //the first question is the manager, so this method asks the manager questions, then uses recursion to ask if the user would like to continue
   function getManager(){
     inquirer
     .prompt(managerQuestions)
     //wait for response to all question and then use answers
     .then((answers) => {
+      //create manager object from answer
       const newManager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
+      //add object to list of employees
       employeeList.push(newManager);
+      //use recursion to ask if the user will continue
       continueBuilding();
     });
   }
 
+  //this method asks the user what they want to do now
   function continueBuilding(){
     inquirer
     .prompt(employeeQuery)
     //wait for response to all question and then use answers
+    //this finds the answer for what the user want to do and uses recursion to perform that choice
     .then((answers) => {
       if(answers.query == 'add Engineer'){
         addEngineer();
@@ -244,25 +234,33 @@ const managerQuestions = [
       }
     });
   }
-
+ 
+  //this method asks the engineer questions, then uses recursion to ask if the user would like to continue
   function addEngineer(){
     inquirer
     .prompt(engineerQuestions)
     //wait for response to all question and then use answers
     .then((answers) => {
+      //create engineer object from answer
       const newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.gitHub)
+      //add object to list of employees
       employeeList.push(newEngineer);
+      //use recursion to ask if the user will continue
       continueBuilding();
     });
   }
 
+  //this method asks the engineer questions, then uses recursion to ask if the user would like to continue
   function addIntern(){
     inquirer
     .prompt(interQuestions)
     //wait for response to all question and then use answers
     .then((answers) => {
+      //create intern object from answer
       const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school)
-      employeeList.push(newIntern);      
+      //add object to list of employees
+      employeeList.push(newIntern);   
+      //use recursion to ask if the user will continue
       continueBuilding();
     });
   }
@@ -271,8 +269,11 @@ const managerQuestions = [
   // App initialisation
 function init() {
 
+  //employee list emptied
   employeeList = [];
+  //string template empty
   printToFile = '';
+  //ask first question, which is the manager questions
   getManager();
 }
   
