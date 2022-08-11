@@ -53,7 +53,7 @@ Follow the prompts to include the information for your team.
 ---
 ## Video Demo
 
-[Link to Demo](https://youtu.be/bh7CS-XA1Yk)
+[Link to Demo](https://youtu.be/12_rirfDNJk)
 
 Select the 1080p option for better resolution of text.
 

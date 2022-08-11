@@ -51,8 +51,8 @@ const generateHTMLPageHeader = () => {
     <ul class="list-group list-group-flush m-4">
      <li class="list-group-item">ID: ${id}</li>
      <li class="list-group-item">Email: <a href="mailto:${email}" class="card-link">${email}</a></li>
-     <li class="list-group-item">GitHub: ${gitHub}</li>
-    </ul>
+     <li class="list-group-item">GitHub: <a target="_blank" href="https://github.com/${gitHub}" class="card-link">${gitHub}</a></li>
+    </ul> 
    </div>
  </div>\n`
  }
