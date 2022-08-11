@@ -1,16 +1,18 @@
 const Engineer = require("../lib/Engineer");
 
-describe("Manager", () => {
+describe("Engineer", () => {
+//wrapper from engineer test suite
   describe("Initialization", () => {
+    //wrapper for initialisation/constructor test
     it("should return the object containing a 'name' property when called with the 'new' keyword", () => {
       let name = "Chris";
       let id = 2;
       let email = "Chris@employee.com";
       let gitHub = 'gitName';
 
-      
+      //initialize constructor
       const obj = new Engineer(name, id, email, gitHub);
-
+      //check if name is the same as the one entered
       expect(obj.name).toEqual('Chris');
     });
 
@@ -20,9 +22,9 @@ describe("Manager", () => {
       let email = "Chris@employee.com";
       let gitHub = 'gitName';
 
-      
+      //initialize constructor
       const obj = new Engineer(name, id, email, gitHub);
-
+      //check if id is the same as the one entered
       expect(obj.id).toEqual(2);
     });
 
@@ -31,7 +33,10 @@ describe("Manager", () => {
       let id = 2;
       let email = "Chris@employee.com";
       let gitHub = 'gitName';
+
+      //initialize constructor
       const obj = new Engineer(name, id, email, gitHub);
+      //check if email is the same as the one entered
       expect(obj.email).toEqual('Chris@employee.com');
     });
 
@@ -41,9 +46,9 @@ describe("Manager", () => {
       let email = "Chris@employee.com";
       let gitHub = 'gitName';
 
-      
+      //initialize constructor
       const obj = new Engineer(name, id, email, gitHub);
-
+      //check if gitthub is the same as the one entered
       expect(obj.gitHub).toEqual('gitName');
     });
   });
@@ -56,9 +61,9 @@ describe("Manager", () => {
       let email = "Chris@employee.com";
       let gitHub = 'gitName';
 
-      
+      //initialize constructor
       const obj = new Engineer(name, id, email, gitHub);
-
+      //check if method returns the name created when constructed
       expect(obj.getName()).toEqual('Chris');
     });
   });
@@ -70,9 +75,9 @@ describe("Manager", () => {
       let email = "Chris@employee.com";
       let gitHub = 'gitName';
 
-      
+      //initialize constructor
       const obj = new Engineer(name, id, email, gitHub);
-
+      //check if method returns the id created when constructed
       expect(obj.getId()).toEqual(2);
     });
   });
@@ -84,9 +89,9 @@ describe("Manager", () => {
       let email = "Chris@employee.com";
       let gitHub = 'gitName';
 
-      
+      //initialize constructor
       const obj = new Engineer(name, id, email, gitHub);
-
+      //check if method returns the email created when constructed
       expect(obj.getEmail()).toEqual("Chris@employee.com");
     });
   });
@@ -98,9 +103,9 @@ describe("Manager", () => {
       let email = "Chris@employee.com";
       let gitHub = 'gitName';
 
-      
+      //initialize constructor
       const obj = new Engineer(name, id, email, gitHub);
-
+      //check if method returns the overwritten role created when constructed
       expect(obj.getRole()).toEqual('Engineer');
     });
   });
@@ -111,8 +116,9 @@ describe("Manager", () => {
       let email = "Chris@employee.com";
       let gitHub = 'gitName';
 
+      //initialize constructor
       const obj = new Engineer(name, id, email, gitHub);
-
+      //check if method returns the gitHub created when constructed
       expect(obj.getGithub()).toEqual('gitName');
     });
   });

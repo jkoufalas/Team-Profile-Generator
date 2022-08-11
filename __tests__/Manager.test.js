@@ -1,16 +1,18 @@
 const Manager = require("../lib/Manager");
 
 describe("Manager", () => {
-  describe("Initialization", () => {
+//wrapper from manager test suite
+describe("Initialization", () => {
+    //wrapper for initialisation/constructor test
     it("should return the object containing a 'name' property when called with the 'new' keyword", () => {
       let name = "John";
       let id = 2;
       let email = "John@employee.com";
       let officeNumber = '12';
 
-      
+      //initialize constructor
       const obj = new Manager(name, id, email, officeNumber);
-
+      //check if name is the same as the one entered
       expect(obj.name).toEqual('John');
     });
 
@@ -20,9 +22,9 @@ describe("Manager", () => {
       let email = "John@employee.com";
       let officeNumber = '12';
 
-      
+      //initialize constructor
       const obj = new Manager(name, id, email, officeNumber);
-
+      //check if id is the same as the one entered
       expect(obj.id).toEqual(2);
     });
 
@@ -31,7 +33,10 @@ describe("Manager", () => {
       let id = 2;
       let email = "John@employee.com";
       let officeNumber = '12';
+
+      //initialize constructor
       const obj = new Manager(name, id, email, officeNumber);
+      //check if email is the same as the one entered
       expect(obj.email).toEqual('John@employee.com');
     });
 
@@ -41,9 +46,9 @@ describe("Manager", () => {
       let email = "John@employee.com";
       let officeNumber = 12;
 
-      
+      //initialize constructor
       const obj = new Manager(name, id, email, officeNumber);
-
+      //check if office number is the same as the one entered
       expect(obj.officeNumber).toEqual(12);
     });
   });
@@ -56,9 +61,9 @@ describe("Manager", () => {
       let email = "John@employee.com";
       let officeNumber = 12;
 
-      
+      //initialize constructor
       const obj = new Manager(name, id, email, officeNumber);
-
+      //check if method returns the name created when constructed
       expect(obj.getName()).toEqual('John');
     });
   });
@@ -70,9 +75,9 @@ describe("Manager", () => {
       let email = "John@employee.com";
       let officeNumber = 12;
 
-      
+      //initialize constructor
       const obj = new Manager(name, id, email, officeNumber);
-
+      //check if method returns the id created when constructed
       expect(obj.getId()).toEqual(2);
     });
   });
@@ -84,9 +89,9 @@ describe("Manager", () => {
       let email = "John@employee.com";
       let officeNumber = 12;
 
-      
+      //initialize constructor
       const obj = new Manager(name, id, email, officeNumber);
-
+      //check if method returns the email created when constructed
       expect(obj.getEmail()).toEqual("John@employee.com");
     });
   });
@@ -98,9 +103,9 @@ describe("Manager", () => {
       let email = "John@employee.com";
       let officeNumber = 12;
 
-      
+      //initialize constructor
       const obj = new Manager(name, id, email, officeNumber);
-
+      //check if method returns the overwritten role created when constructed
       expect(obj.getRole()).toEqual('Manager');
     });
   });
@@ -110,9 +115,10 @@ describe("Manager", () => {
       let id = 2;
       let email = "John@employee.com";
       let officeNumber = 12;
-
+      
+      //initialize constructor
       const obj = new Manager(name, id, email, officeNumber);
-
+      //check if method returns the office number created when constructed
       expect(obj.getOfficeNumber()).toEqual(12);
     });
   });
